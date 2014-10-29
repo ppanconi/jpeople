@@ -5,7 +5,6 @@
  */
 package it.panks.jpeople.model;
 
-import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -17,13 +16,15 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 /**
  *
  * @author paolo.panconi
  */
+@RunWith(JUnit4.class)
 public class PersonTest {
     
     Person p1 = new Person();

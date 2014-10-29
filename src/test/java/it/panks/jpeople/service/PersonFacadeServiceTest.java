@@ -6,12 +6,11 @@
 package it.panks.jpeople.service;
 
 import it.panks.jpeople.model.Person;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import javax.ejb.EJB;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.persistence.UsingDataSet;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
@@ -20,18 +19,19 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
 /**
  *
  * @author paolo.panconi
  */
+//@Ignore
 @RunWith(Arquillian.class)
+@UsingDataSet("datasets/person.yml")
 public class PersonFacadeServiceTest {
 
     @EJB
-    PersonFacadeService instance;
+    private IPersonFacadeService instance;
 
     Person  p1 = new Person();
        
@@ -39,53 +39,55 @@ public class PersonFacadeServiceTest {
     public PersonFacadeServiceTest() {
     }
     
-    @BeforeClass
-    public void makeTestData() {
-        p1.setName("Paul");
-        p1.setSurname("Panks");
-        p1.setFiscalcode("PNCPLA74B19D612D");
-        p1.setDateffBirth(new Date(1094, 1, 19));
-        p1.setNotes("Me, or my data");
-    }
-
     @Deployment
     public static Archive<?> createDeployment() {
         return ShrinkWrap.create(WebArchive.class, "test.war")
-                .addPackage(PersonFacadeService.class.getPackage())
+                .addClasses(Person.class)
+                .addClasses(IPersonFacadeService.class)
+                .addClasses(PersonFacadeService.class)
                 .addAsResource("test-persistence.xml", "META-INF/persistence.xml")
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
     }
 
     @Before
     public void preparePersistenceTest() throws Exception {
-        clearData();
-        insertData();
+        
+        p1.setId(1L);
+        p1.setVersion(1L);
+        p1.setName("Paul");
+        p1.setSurname("Panks");
+        p1.setFiscalcode("PNCPLA74B19D612D");
+        p1.setDateffBirth(new Date(1974, 1, 19));
+        p1.setNotes("Me, or my data");
+        
+//        clearData();
+//        insertData();
 //        startTransaction();
     }
 
-    private void clearData() throws Exception {
-//        utx.begin();
-//        em.joinTransaction();
-        System.out.println("Dumping old records...");
-        instance.getEntityManager().getTransaction().begin();
-        instance.getEntityManager().createQuery("delete from Person").executeUpdate();
-//        utx.commit();
-        instance.getEntityManager().getTransaction().commit();
-    }
+//    private void clearData() throws Exception {
+////        utx.begin();
+////        em.joinTransaction();
+//        System.out.println("Dumping old records...");
+//        instance.getEntityManager().getTransaction().begin();
+//        instance.getEntityManager().createQuery("delete from Person").executeUpdate();
+////        utx.commit();
+//        instance.getEntityManager().getTransaction().commit();
+//    }
 
-    private void insertData() throws Exception {
-//        utx.begin();
-//        em.joinTransaction();
-        System.out.println("Inserting records...");
-        instance.getEntityManager().getTransaction().begin();
-        
-        instance.getEntityManager().persist(p1);
-        instance.getEntityManager().getTransaction().commit();
-//        utx.commit();
-        
-        // clear the persistence context (first-level cache)
-//        em.clear();
-    }
+//    private void insertData() throws Exception {
+////        utx.begin();
+////        em.joinTransaction();
+//        System.out.println("Inserting records...");
+//        instance.getEntityManager().getTransaction().begin();
+//        
+//        instance.getEntityManager().persist(p1);
+//        instance.getEntityManager().getTransaction().commit();
+////        utx.commit();
+//        
+//        // clear the persistence context (first-level cache)
+////        em.clear();
+//    }
 
 //    private void startTransaction() throws Exception {
 //        utx.begin();
@@ -99,45 +101,46 @@ public class PersonFacadeServiceTest {
     /**
      * Test of create method, of class PersonFacadeService.
      */
-    @Test
-    public void testCreate() throws Exception {
-        System.out.println("create");
-        Person entity = p1;
-        instance.create(entity);
-        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-        
-        assertNotNull(entity.getId());
-    }
+//    @Test
+//    public void testCreate() throws Exception {
+//        System.out.println("create");
+//        Person entity = p1;
+//        instance.create(entity);
+//        // TODO review the generated test code and remove the default call to fail.
+////        fail("The test case is a prototype.");
+//        
+//        assertNotNull(entity.getId());
+//    }
 
     /**
      * Test of edit method, of class PersonFacadeService.
      */
-    @Test
-    public void testEdit() throws Exception {
-        System.out.println("edit");
-        Person entity = p1;
-        instance.edit(entity);
-        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-    }
+//    @Test
+//    public void testEdit() throws Exception {
+//        System.out.println("edit");
+//        Person entity = p1;
+//        instance.edit(entity);
+//        // TODO review the generated test code and remove the default call to fail.
+////        fail("The test case is a prototype.");
+//    }
 
     /**
      * Test of remove method, of class PersonFacadeService.
      */
-    @Test
-    public void testRemove() throws Exception {
-        System.out.println("remove");
-        Person entity = p1;
-        instance.remove(entity);
-        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-    }
+//    @Test
+//    public void testRemove() throws Exception {
+//        System.out.println("remove");
+//        Person entity = p1;
+//        instance.remove(entity);
+//        // TODO review the generated test code and remove the default call to fail.
+////        fail("The test case is a prototype.");
+//    }
 
     /**
      * Test of find method, of class PersonFacadeService.
      */
     @Test
+    
     public void testFind() throws Exception {
         System.out.println("find");
         Long id = 1L;
@@ -151,16 +154,16 @@ public class PersonFacadeServiceTest {
     /**
      * Test of findAll method, of class PersonFacadeService.
      */
-    @Test
-    public void testFindAll() throws Exception {
-        System.out.println("findAll");
-        List<Person> expResult = new ArrayList<>();
-        expResult.add(p1);
-        List<Person> result = instance.findAll();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-    }
+//    @Test
+//    public void testFindAll() throws Exception {
+//        System.out.println("findAll");
+//        List<Person> expResult = new ArrayList<>();
+//        expResult.add(p1);
+//        List<Person> result = instance.findAll();
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+////        fail("The test case is a prototype.");
+//    }
 
     /**
      * Test of findRange method, of class PersonFacadeService.
@@ -179,14 +182,14 @@ public class PersonFacadeServiceTest {
     /**
      * Test of count method, of class PersonFacadeService.
      */
-    @Test
-    public void testCount() throws Exception {
-        System.out.println("count");
-        int expResult = 1;
-        int result = instance.count();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-    }
+//    @Test
+//    public void testCount() throws Exception {
+//        System.out.println("count");
+//        int expResult = 1;
+//        int result = instance.count();
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+////        fail("The test case is a prototype.");
+//    }
 
 }

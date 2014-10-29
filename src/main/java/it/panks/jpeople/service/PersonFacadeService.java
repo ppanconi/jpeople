@@ -14,6 +14,7 @@ import javax.persistence.PersistenceContext;
  *
  * @author paolo.panconi
  */
+
 @Stateless
 public class PersonFacadeService extends BaseEntityFacadeService<Person> implements IPersonFacadeService {
 

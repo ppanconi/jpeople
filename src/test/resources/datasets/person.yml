@@ -1,0 +1,10 @@
+## YAML Template.
+person:
+  - id: 1
+    version: 1
+    notes: "Me, or my data"
+    name: "Paul"
+    surname: "Panks"
+    fiscalcode: "PNCPLA74B19D612D"
+    dateffBirth: 1974-02-19
+    
