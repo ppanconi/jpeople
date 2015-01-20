@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" >
+    <h:head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta http-equiv="Cache-Control" content="no-store"/>
+        <meta http-equiv="Pragma" content="no-cache"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="icon" href="#{resource['images/favicon.ico']}"/>
+        <title><ui:insert name="title">Home</ui:insert> | JPeople   </title>
+        <ui:include src="/common/assets.xhtml"/>
+    </h:head>
+    <h:body>
+
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">JPeople</a>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><h:outputLink value="${request.contextPath}/faces/index.xhtml">Home</h:outputLink></li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Menu <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><h:outputLink value="${request.contextPath}/faces/people/List.xhtml">Serach People</h:outputLink></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Separated link</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">One more separated link</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#login">Sign In</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </nav>
+
+        <div class="container">
+            <div class="starter-template">
+                <ui:insert name="content">
+                    <h1>Bootstrap starter template</h1>
+                    <p class="lead">Use this document as a way to quickly start any new project.<br/> All you get is this text and a mostly barebones HTML document.</p>
+                </ui:insert>
+            </div>
+        </div><!-- /.container -->
+
+        <!-- Bootstrap core JavaScript
+            ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <h:outputScript library="webjars" name="jquery/1.11.2/jquery.min.js" />
+        <h:outputScript library="webjars" name="bootstrap/3.3.1/js/bootstrap.min.js" />
+
+        <ui:insert name="scripts"/>
+
+    </h:body>
+</html>

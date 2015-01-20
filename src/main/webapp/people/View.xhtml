@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="./../template/main.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewPersonTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="content">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewPersonLabel_name}"/>
+                    <h:outputText value="#{personController.selected.name}" title="#{bundle.ViewPersonTitle_name}"/>
+                    <h:outputText value="#{bundle.ViewPersonLabel_surname}"/>
+                    <h:outputText value="#{personController.selected.surname}" title="#{bundle.ViewPersonTitle_surname}"/>
+                    <h:outputText value="#{bundle.ViewPersonLabel_fiscalcode}"/>
+                    <h:outputText value="#{personController.selected.fiscalcode}" title="#{bundle.ViewPersonTitle_fiscalcode}"/>
+                    <h:outputText value="#{bundle.ViewPersonLabel_dateffBirth}"/>
+                    <h:outputText value="#{personController.selected.dateffBirth}" title="#{bundle.ViewPersonTitle_dateffBirth}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewPersonLabel_id}"/>
+                    <h:outputText value="#{personController.selected.id}" title="#{bundle.ViewPersonTitle_id}"/>
+                    <h:outputText value="#{bundle.ViewPersonLabel_version}"/>
+                    <h:outputText value="#{personController.selected.version}" title="#{bundle.ViewPersonTitle_version}"/>
+                    <h:outputText value="#{bundle.ViewPersonLabel_notes}"/>
+                    <h:outputText value="#{personController.selected.notes}" title="#{bundle.ViewPersonTitle_notes}"/>
+                </h:panelGrid>
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewPersonEditLink}" class="btn btn-success"/>
+                &nbsp;
+                <h:commandLink action="#{personController.prepareCreate}" value="#{bundle.ViewPersonCreateLink}" class="btn btn-primary" />
+                &nbsp;
+                <h:commandLink action="#{personController.prepareList}" value="#{bundle.ViewPersonShowAllLink}" class="btn btn-primary"/>
+                &nbsp;
+                <h:commandLink action="#{personController.destroyAndView}" value="#{bundle.ViewPersonDestroyLink}" class="btn btn-danger"/>
+                &nbsp;&nbsp;&nbsp;
+                <h:link outcome="/index" value="#{bundle.CreatePersonIndexLink}" class="btn btn-default"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

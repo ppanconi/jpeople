@@ -24,7 +24,7 @@ public class PersonFacadeService extends BaseEntityFacadeService<Person> impleme
     public PersonFacadeService() {
         super(Person.class);
     }
-
+    
     @Override
     protected EntityManager getEntityManager() {
         return em;

@@ -22,12 +22,16 @@ public abstract class BaseEntityFacadeService<T> implements ICrudService<T> {
 
     protected abstract EntityManager getEntityManager();
 
+    public Class<T> getEntityClass() {
+        return entityClass;
+    }
+
     public void create(T entity) {
         getEntityManager().persist(entity);
     }
 
-    public void edit(T entity) {
-        getEntityManager().merge(entity);
+    public T edit(T entity) {
+        return getEntityManager().merge(entity);
     }
 
     public void remove(T entity) {

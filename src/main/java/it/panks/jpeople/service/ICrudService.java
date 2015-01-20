@@ -6,17 +6,19 @@
 package it.panks.jpeople.service;
 
 import java.util.List;
+import javax.ejb.Local;
 
 /**
  *
  * @author paolo.panconi
  * @param <T>
  */
+@Local
 public interface ICrudService<T> {
     
     public void create(T entity);
 
-    public void edit(T entity) ;
+    public T edit(T entity) ;
 
     public void remove(T entity);
 
@@ -27,5 +29,7 @@ public interface ICrudService<T> {
     public List<T> findRange(int[] range);
 
     public int count() ;
+
+    public Class<T> getEntityClass();
     
 }
